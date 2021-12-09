@@ -1,5 +1,7 @@
 package com.danit.dao;
 
+import com.danit.entities.User;
+
 import java.util.List;
 
 public interface UserDao {

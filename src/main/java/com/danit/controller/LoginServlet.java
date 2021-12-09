@@ -1,12 +1,10 @@
 package com.danit.controller;
 
-import com.danit.dao.User;
+import com.danit.entities.User;
 import com.danit.dao.UserDao;
-import com.danit.dao.UserJdbcDao;
 
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("login", user.getLogin());
 //            response.sendRedirect("/hello");
-            request.getRequestDispatcher("/hello").forward(request, response);
+            request.getRequestDispatcher("/users").forward(request, response);
         }
 
     }

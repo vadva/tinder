@@ -1,4 +1,4 @@
-package com.danit.dao;
+package com.danit.entities;
 
 public class User {
     private Long id;
@@ -7,14 +7,18 @@ public class User {
     private Long groupId;
     private String login;
     private String password;
+    private String urlPhoto;
+    private Boolean liked = true;
 
-    public User(Long id, String name, int age, Long groupId, String login, String password) {
+
+    public User(Long id, String name, int age, Long groupId, String login, String password,String urlPhoto) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.groupId = groupId;
         this.login = login;
         this.password = password;
+        this.urlPhoto=urlPhoto;
     }
 
     public User(String name, int age, Long groupId, String login, String password) {
@@ -23,6 +27,27 @@ public class User {
         this.groupId = groupId;
         this.login = login;
         this.password = password;
+    }
+//    public User(String name, int age,String photo) {
+//        this.name = name;
+//        this.age = age;
+//        this.photo=photo;
+//    }
+
+    public String getPhoto() {
+        return urlPhoto;
+    }
+
+    public void setPhoto(String photo) {
+        this.urlPhoto = urlPhoto;
+    }
+
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
     }
 
     public Long getId() {

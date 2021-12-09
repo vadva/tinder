@@ -1,12 +1,9 @@
 package com.danit.dao;
 
 //import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
+import com.danit.entities.User;
 import org.postgresql.ds.PGPoolingDataSource;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import javax.sql.PooledConnection;
 import java.sql.*;
 import java.util.List;
 
@@ -31,10 +28,10 @@ public class UserJdbcDao implements UserDao {
 
     public UserJdbcDao() {
         source = new PGPoolingDataSource();
-        source.setServerName("ec2-44-193-111-218.compute-1.amazonaws.com");
-        source.setDatabaseName("d6bdpvuaqdavsb");
-        source.setUser("pftdgngxtooerk");
-        source.setPassword("72e03083f006bf5eb24f445f08ebf50254ff3af2f16aeaec8b2df2b08353412f");
+        source.setServerName("ec2-54-160-103-135.compute-1.amazonaws.com");
+        source.setDatabaseName("db8hpni8os01sa");
+        source.setUser("fkqjvofduixbby");
+        source.setPassword("1f4360460a8910be3968941af4da8524c29e52b80b65572bad59d7f71ee008b4");
         source.setMaxConnections(10);
     }
 
@@ -45,13 +42,14 @@ public class UserJdbcDao implements UserDao {
             connection = source.getConnection();
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO users.users VALUES (name = ?, age = ?, groupId = ?, login = ?, password = ?)");
+                    "INSERT INTO users.users VALUES (name = ?, age = ?, groupId = ?, login = ?, password = ?,urlPhoto=?)");
             //ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE id = 3");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setLong(2, user.getAge());
             preparedStatement.setLong(3, user.getGroupId());
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getPhoto());
 
 
             int executionResult = preparedStatement.executeUpdate();
@@ -97,7 +95,8 @@ public class UserJdbcDao implements UserDao {
                 Long groupId = resultSet.getLong("group_id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                return new User(id, name, age, groupId, login, password);
+                String urlPhoto = resultSet.getString("urlPhoto");
+                return new User(id, name, age, groupId, login, password,urlPhoto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,7 +146,8 @@ public class UserJdbcDao implements UserDao {
                 Long groupId = resultSet.getLong("group_id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                return new User(id, name, age, groupId, login, password);
+                String urlPhoto = resultSet.getString("urlPhoto");
+                return new User(id, name, age, groupId, login, password,urlPhoto);
             }
         } catch (SQLException e) {
             e.printStackTrace();

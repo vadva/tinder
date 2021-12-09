@@ -1,10 +1,6 @@
 package com.danit;
 
-import com.danit.controller.FileServlet;
-import com.danit.controller.HelloServlet;
-import com.danit.controller.LoginFilter;
-import com.danit.controller.LoginServlet;
-import com.danit.controller.TemplateEngine;
+import com.danit.controller.*;
 import com.danit.dao.UserDao;
 import com.danit.dao.UserJdbcDao;
 import org.eclipse.jetty.server.Server;
@@ -38,6 +34,8 @@ public class JettyRun {
         handler.addServlet(new ServletHolder(new LoginServlet(userDao, templateEngine)), "/");
         handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
         handler.addFilter(new FilterHolder(new LoginFilter()), "/*", EnumSet.of(DispatcherType.REQUEST));
+
+        handler.addServlet(new ServletHolder(new TestServlet(userDao,templateEngine)), "/users");
 
 //        handler.addServlet(new ServletHolder(new UserServlet(userDao)), "/users");
 
