@@ -42,7 +42,7 @@ public class UserJdbcDao implements UserDao {
             connection = source.getConnection();
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO populate.users VALUES (name = ?, age = ?, groupId = ?, login = ?, password = ?,urlPhoto=?)");
+                    "INSERT INTO users VALUES (name = ?, age = ?, groupId = ?, login = ?, password = ?,urlPhoto=?)");
             //ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE id = 3");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setLong(2, user.getAge());
@@ -84,7 +84,7 @@ public class UserJdbcDao implements UserDao {
         try {
             connection = source.getConnection();
             Statement statement = connection.createStatement();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM populate.users WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             //ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE id = 3");
             preparedStatement.setLong(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -133,7 +133,7 @@ public class UserJdbcDao implements UserDao {
             connection = source.getConnection();
             Statement statement = connection.createStatement();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM populate.users WHERE login=? AND password=?");
+                    "SELECT * FROM users WHERE login=? AND password=?");
             //ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE id = 3");
             preparedStatement.setString(1, loginUser);
             preparedStatement.setString(2, passwordUser);
